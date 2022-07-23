@@ -4,8 +4,12 @@ type SortedArray<T> = Nominal<"sortedArray", Array<T>>;
 
 const sort = <T>(arr: Array<T>): SortedArray<T> => arr.sort() as SortedArray<T>;
 
-const nonEmpty = <K, T extends Array<K>>(arr: T): NonEmptyArray<K, T> =>
-  arr.filter(Boolean) as NonEmptyArray<K, T>;
+const nonEmpty = <K, T extends Array<K>>(arr: T): NonEmptyArray<K, T> => {
+  if (arr.length === 0) {
+    throw new Error("Array is empty");
+  }
+  return arr as NonEmptyArray<K, T>;
+};
 
 type NonEmptyArray<K, T extends Array<K>> = Nominal<"nonEmptyArray", T>;
 type NonEmptySorted<T> = NonEmptyArray<T, SortedArray<T>>;

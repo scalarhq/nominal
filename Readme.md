@@ -1,11 +1,13 @@
 # Nominal
-Bringing [nominal types](https://en.wikipedia.org/wiki/Nominal_type_system) to Typescript.
+The right way to do types in typescript.
 
 ## Installation
 
-```
+```bash
 npm install nominal-types
+
 yarn install nominal-types
+
 pnpm install nominal-types
 ```
 
@@ -54,15 +56,18 @@ type SortedArray<T> = Nominal<'sortedArray', Array<T>>
 
 const sort = <T>(arr: Array<T>): SortedArray<T> => arr.sort()
 
-const binarySearch = <T>(sorted: SortedArray<T>): T | undefined => {
+const binarySearch = <T>(
+  sorted: SortedArray<T>,
+  search: T
+): number | undefined  => {
     /* ... */
 }
 
-const regularArray = [1, 2, 3]
+const regularArray = [1, 7, 2, 3, 6, 9, 10, 4, 5]
 // won't work
-binarySearch(regularArray)
+binarySearch(regularArray, 2)
 // will work
-binarySearch(sort(regularArray))
+binarySearch(sort(regularArray), 3)
 ```
 
 This is also known as [Refinement types](https://en.wikipedia.org/wiki/Refinement_type)
@@ -111,6 +116,6 @@ More examples in [examples folder](./examples), you can also see them typed on r
 
 ## Credits
 
-You can read more about this https://zackoverflow.dev/writing/nominal-types-typescript
+You can read more about this https://zackoverflow.dev/writing/nominal-and-refinement-types-typescript
 
 Inspiration from [Ghosts of Departed Proofs (Functional Pearl)](https://kataskeue.com/gdp.pdf)

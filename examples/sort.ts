@@ -1,15 +1,31 @@
-import { Nominal } from '../src'
+import { Nominal } from "../src";
 
-type SortedArray<T> = Nominal<'sortedArray', Array<T>>
+type SortedArray<T> = Nominal<"sortedArray", Array<T>>;
 
-const sort = <T>(arr: Array<T>): SortedArray<T> => arr.sort() as SortedArray<T>
+const sort = <T>(arr: Array<T>): SortedArray<T> => arr.sort() as SortedArray<T>;
 
-const binarySearch = <T>(sorted: SortedArray<T>): T | undefined => {
-    /* ... */
-}
+const binarySearch = <T>(
+  sorted: SortedArray<T>,
+  search: T
+): number | undefined => {
+  if (sorted.length !== 0) {
+    const midPoint = sorted.length / 2;
+    if (sorted[midPoint] === search) {
+      return midPoint;
+    }
 
-const regularArray = [1, 2, 3]
+    if (search > sorted[midPoint]) {
+      return binarySearch(sorted.slice(midPoint) as SortedArray<T>, search);
+    } else {
+      return binarySearch(sorted.slice(0, midPoint) as SortedArray<T>, search);
+    }
+  } else {
+    return undefined;
+  }
+};
+
+const regularArray = [1, 7, 2, 3, 6, 9, 10, 4, 5];
 // won't work
-binarySearch(regularArray)
+binarySearch(regularArray, 2);
 // will work
-binarySearch(sort(regularArray))
+binarySearch(sort(regularArray), 2);
