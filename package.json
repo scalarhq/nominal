@@ -1,0 +1,21 @@
+{
+  "name": "nominal-types",
+  "version": "0.1.2",
+  "description": "Nominal types for better typesafety",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "keywords": [
+    "nominal",
+    "typesafety",
+    "custom",
+    "ids"
+  ],
+  "author": "modfy",
+  "license": "MIT",
+  "files": [
+    "src/index.ts"
+  ],
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
