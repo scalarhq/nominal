@@ -1,12 +1,12 @@
-import { Nominal } from "../src";
+import { Nominal } from '../src';
 
-type SortedArray<T> = Nominal<"sortedArray", Array<T>>;
+type SortedArray<T> = Nominal<'sortedArray', T[]>;
 
-const sort = <T>(arr: Array<T>): SortedArray<T> => arr.sort() as SortedArray<T>;
+const sort = <T>(arr: T[]): SortedArray<T> => arr.sort() as SortedArray<T>;
 
 const binarySearch = <T>(
   sorted: SortedArray<T>,
-  search: T
+  search: T,
 ): number | undefined => {
   if (sorted.length !== 0) {
     const midPoint = sorted.length / 2;

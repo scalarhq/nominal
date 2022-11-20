@@ -1,13 +1,12 @@
 class NominalWrapper<Name extends string, Type> {
   nominal = () => {
-    const NewSymbol = Symbol("");
+    const NewSymbol = Symbol('');
 
-    type NominalType<S extends string | never, T> = T & {
-      
-      /**
-       * @deprecated Do not use this 
+    type NominalType<N extends string | never, T> = T & {
+      readonly /**
+       * @deprecated Do not use this it may not exist in runtime, this is only for typechecking purpose
        */
-      readonly [key in S]: typeof NewSymbol;
+      [key in N]: typeof NewSymbol;
     };
 
     return {} as NominalType<Name, Type>;
@@ -15,11 +14,13 @@ class NominalWrapper<Name extends string, Type> {
 }
 
 export type Nominal<Name extends string, Type> = ReturnType<
-  NominalWrapper<Name, Type>["nominal"]
+  NominalWrapper<Name, Type>['nominal']
 >;
 
 type InternalInferPrimitive<T> = T extends {}
-  ? { [K in keyof T]: isSymbol<T[K]> extends true ? never : T[K] }
+  ? {
+      [K in keyof T]: isSymbol<T[K]> extends true ? never : T[K];
+    }
   : undefined;
 
 type InferPrimitive<T> = T extends {}
@@ -43,3 +44,6 @@ const make = <T>(value: InferPrimitive<T>) => value as T;
 export const nominal = {
   make,
 };
+
+export * from './standardLib';
+export * from './proportionalityConstant';
