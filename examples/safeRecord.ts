@@ -23,10 +23,13 @@ const add = <V, R extends string, R2 extends string>(
 
 const safeRecord = newRecord('a', 'b');
 
+// @ts-expect-error -  Won't work
 const x = safeRecord['random']; // any
 
 const lmao = add(safeRecord, 'lmao', 'nice');
 
 lmao.a; // string
 lmao.lmao; // string
+
+// @ts-expect-error -  Won't work
 lmao['random']; // any -  Untyped

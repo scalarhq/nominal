@@ -1,5 +1,5 @@
 // After Nominal
-import { Nominal, nominal } from '../src';
+import { Nominal } from '../src';
 import { Equal, Expect } from '@type-challenges/utils';
 
 type Minutes = Nominal<'Minutes', number>;
@@ -9,7 +9,7 @@ const minutesToSeconds = (minutes: Minutes): Seconds =>
   (minutes * 60) as Seconds;
 
 // You can directly type cast or use nominal.make
-const seconds = nominal.make<Seconds>(420);
+const seconds = 420 as Seconds;
 const minutes = 1337 as Minutes;
 
 // @ts-expect-error - doesn't work, yay type safety

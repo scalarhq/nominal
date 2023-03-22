@@ -14,7 +14,8 @@ const binarySearch = <T>(
       return midPoint;
     }
 
-    if (search > sorted[midPoint]) {
+    // Bang: Midpoint will exist
+    if (search > sorted[midPoint]!) {
       return binarySearch(sorted.slice(midPoint) as SortedArray<T>, search);
     } else {
       return binarySearch(sorted.slice(0, midPoint) as SortedArray<T>, search);
@@ -25,7 +26,7 @@ const binarySearch = <T>(
 };
 
 const regularArray = [1, 7, 2, 3, 6, 9, 10, 4, 5];
-// won't work
+// @ts-expect-error  won't work
 binarySearch(regularArray, 2);
 // will work
 binarySearch(sort(regularArray), 2);
